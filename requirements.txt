@@ -1,0 +1,6 @@
+Flask
+Flask-Talisman
+Flask-WTF
+python-dotenv
+pypqc
+cryptography
