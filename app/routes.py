@@ -77,17 +77,3 @@ def index():
 
     return render_template("index.html", **context)
 
-@main.route("/generate-keys", methods=["POST"])
-def generate_keys_ajax():
-    try:
-        pk, sk = generate_keys()
-        if pk and sk:
-            session['public_key'] = pk
-            session['private_key'] = sk
-            return jsonify({
-                'public_key': pk,
-                'private_key': sk
-            })
-        return jsonify({'error': 'Key generation failed'}), 500
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
