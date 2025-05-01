@@ -8,25 +8,7 @@ body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.crypto-section {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background: var(--crypto-section-bg);
-    border-radius: 0.5rem;
-    border: 1px solid var(--border-color);
-}
 
-.card {
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
-}
-
-.copy-btn {
-    position: absolute;
-    right: 1rem;
-    top: 2.2rem;
-    padding: 0.25rem 0.5rem;
-}
 
 .form-control[readonly] {
     background-color: var(--crypto-section-bg);
