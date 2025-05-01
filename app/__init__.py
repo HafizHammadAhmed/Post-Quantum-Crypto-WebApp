@@ -9,10 +9,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = os.getenv("SECRET_KEY", "defaultsecret")
     app.config['SESSION_TYPE'] = 'filesystem'
-    
     Talisman(app, content_security_policy=None)
-    
     from .routes import main
     app.register_blueprint(main)
-
     return app
