@@ -32,3 +32,24 @@ def decrypt_message(ciphertext_base64, sk_base64):
     except Exception as e:
         return f"Kyber Error: {e}"
 
+def aes_encrypt(message, shared_secret):
+    try:
+        key = base64.b64decode(shared_secret)[:32]
+        nonce = os.urandom(12)
+        cipher = Cipher(algorithms.AES(key), modes.GCM(nonce), backend=default_backend())
+        encryptor = cipher.encryptor()
+        ciphertext = encryptor.update(message.encode()) + encryptor.finalize()
+        return base64.b64encode(nonce + encryptor.tag + ciphertext).decode()
+    except Exception as e:
+        return f"AES Error: {e}"
+
+def aes_decrypt(ciphertext_base64, shared_secret):
+    try:
+        data = base64.b64decode(ciphertext_base64)
+        nonce, tag, ciphertext = data[:12], data[12:28], data[28:]
+        key = base64.b64decode(shared_secret)[:32]
+        cipher = Cipher(algorithms.AES(key), modes.GCM(nonce, tag), backend=default_backend())
+        decryptor = cipher.decryptor()
+        return (decryptor.update(ciphertext) + decryptor.finalize()).decode()
+    except Exception as e:
+        return f"AES Error: {e}"
